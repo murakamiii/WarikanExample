@@ -21,9 +21,9 @@ extension SplitBillResult {
         
         var localizedDescription: String {
             switch self {
-            case .payUnit: return "支払単位が範囲外です"
-            case .amount: return "金額が範囲外です"
-            case .peopleNumber: return "金額が範囲外です"
+            case .payUnit: return "正しい支払単位を入力してください"
+            case .amount: return "正しい支払単位を入力してください"
+            case .peopleNumber: return "正しい支払単位を入力してください"
             }
         }
     }
@@ -38,16 +38,16 @@ extension SplitBillResult {
     private static let AmountMax = 100_000
     
     static func splitBill(payUnit: UInt, amount: UInt, peopleNumber: UInt) -> SplitBillResult {
-        guard (PayUnitMin...PayUnitMax).contains(Int(payUnit)) else {
-            return SplitBillResult.failure(error: .payUnit)
-        }
-        
         guard (AmountMin...AmountMax).contains(Int(amount)) else {
             return SplitBillResult.failure(error: .amount)
         }
         
         guard (PeopleMin...PeopleMax).contains(Int(peopleNumber)) else {
             return SplitBillResult.failure(error: .peopleNumber)
+        }
+        
+        guard (PayUnitMin...PayUnitMax).contains(Int(payUnit)) else {
+            return SplitBillResult.failure(error: .payUnit)
         }
         
         return SplitBillResult.sucsess(payment: Payment.init(payUnit: payUnit,
