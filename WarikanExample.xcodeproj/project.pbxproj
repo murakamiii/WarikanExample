@@ -13,6 +13,7 @@
 		7B30E3782208670700BC3F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B30E3772208670700BC3F07 /* Assets.xcassets */; };
 		7B30E37B2208670700BC3F07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B30E3792208670700BC3F07 /* LaunchScreen.storyboard */; };
 		7B30E3862208670700BC3F07 /* WarikanExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B30E3852208670700BC3F07 /* WarikanExampleTests.swift */; };
+		7B30E3922208786900BC3F07 /* SplitBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B30E3912208786900BC3F07 /* SplitBill.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		7B30E3812208670700BC3F07 /* WarikanExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarikanExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B30E3852208670700BC3F07 /* WarikanExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarikanExampleTests.swift; sourceTree = "<group>"; };
 		7B30E3872208670700BC3F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B30E3912208786900BC3F07 /* SplitBill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				7B30E3702208670500BC3F07 /* AppDelegate.swift */,
 				7B30E3722208670500BC3F07 /* ViewController.swift */,
+				7B30E3902208782A00BC3F07 /* Model */,
 				7B30E3742208670500BC3F07 /* Main.storyboard */,
 				7B30E3772208670700BC3F07 /* Assets.xcassets */,
 				7B30E3792208670700BC3F07 /* LaunchScreen.storyboard */,
@@ -94,6 +97,14 @@
 				7B30E3872208670700BC3F07 /* Info.plist */,
 			);
 			path = WarikanExampleTests;
+			sourceTree = "<group>";
+		};
+		7B30E3902208782A00BC3F07 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B30E3912208786900BC3F07 /* SplitBill.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B30E3732208670500BC3F07 /* ViewController.swift in Sources */,
+				7B30E3922208786900BC3F07 /* SplitBill.swift in Sources */,
 				7B30E3712208670500BC3F07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
