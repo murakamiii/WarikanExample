@@ -61,12 +61,30 @@ class WarikanExampleTests: XCTestCase {
         let resSucsesPeopleMax = SplitBillResult.splitBill(payUnit: 100, amount: 1000, peopleNumber: 10)
         XCTAssertEqual(resSucsesPeopleMax, SplitBillResult.sucsess(payment: Payment.init(payPerPerson: 100, kickback: 100)))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testSplitBill() {
+        let p1 = Payment.init(payUnit: 100, amount: 1000, peopleNumber: 2)
+        XCTAssertEqual(p1._fraction, 0)
+        XCTAssertEqual(p1._units, 10)
+        XCTAssertEqual(p1._payPerPerson, 500)
+        XCTAssertEqual(p1._kickback, 0)
+        
+        let p2 = Payment.init(payUnit: 100, amount: 1000, peopleNumber: 3)
+        XCTAssertEqual(p2._fraction, 0)
+        XCTAssertEqual(p2._units, 10)
+        XCTAssertEqual(p2._payPerPerson, 400)
+        XCTAssertEqual(p2._kickback, 200)
+        
+        let p3 = Payment.init(payUnit: 100, amount: 1001, peopleNumber: 3)
+        XCTAssertEqual(p3._fraction, 1)
+        XCTAssertEqual(p3._units, 11)
+        XCTAssertEqual(p3._payPerPerson, 400)
+        XCTAssertEqual(p3._kickback, 199)
+        
+        let p4 = Payment.init(payUnit: 101, amount: 2020, peopleNumber: 10)
+        XCTAssertEqual(p4._fraction, 0)
+        XCTAssertEqual(p4._units, 20)
+        XCTAssertEqual(p4._payPerPerson, 202)
+        XCTAssertEqual(p4._kickback, 0)
     }
-
 }

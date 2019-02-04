@@ -34,13 +34,43 @@ enum SplitBillResult: Equatable {
         }
         
         // 未実装
+//        return SplitBillResult.sucsess(payment: Payment.init(payUnit: payUnit,
+//                                                             amount: amount,
+//                                                             peopleNumber: peopleNumber))
         return SplitBillResult.sucsess(payment: Payment.init(payPerPerson: 100, kickback: 100))
     }
 }
 
+fileprivate extension UInt {
+    func zeroOrOne() -> UInt {
+        return self == 0 ? 0 : 1
+    }
+}
+
 struct Payment: Equatable {
-    let payPerPerson: UInt
-    let kickback: UInt
+    let payPerPerson: UInt = 100
+    let kickback: UInt = 100
+    
+    // あとでけす
+    init(payPerPerson: UInt, kickback: UInt) {
+        _fraction = 0
+        _units = 0
+        _payPerPerson = 0
+        _kickback = 0
+    }
+    
+    let _fraction: UInt
+    let _units: UInt
+    let _payPerPerson: UInt
+    let _kickback: UInt
+
+    init(payUnit: UInt, amount: UInt, peopleNumber: UInt) {
+        _fraction = amount % payUnit
+        _units = amount / payUnit + _fraction.zeroOrOne()
+        _payPerPerson = UInt(ceil(Double(_units) / Double(peopleNumber))) * payUnit
+        _kickback = peopleNumber * _payPerPerson - amount
+    }
+    
 }
 
 
