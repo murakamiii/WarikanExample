@@ -22,6 +22,10 @@ class WarikanExampleTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        // success
+        XCTAssertEqual(1 + 1, 2)
+        XCTAssertEqual(1 + 1, 200)
     }
 
     func testPerformanceExample() {
