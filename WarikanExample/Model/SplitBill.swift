@@ -10,9 +10,26 @@ import Foundation
 
 enum SplitBillResult: Equatable {
     case sucsess(payment: Payment)
-    case failure(message: String)
-    
-    
+    case failure(error: SplitBillRangeError)
+}
+
+extension SplitBillResult {
+    enum SplitBillRangeError: Error {
+        case payUnit
+        case amount
+        case peopleNumber
+        
+        var localizedDescription: String {
+            switch self {
+            case .payUnit: return "支払単位が範囲外です"
+            case .amount: return "金額が範囲外です"
+            case .peopleNumber: return "金額が範囲外です"
+            }
+        }
+    }
+}
+
+extension SplitBillResult {
     private static let PayUnitMin = 100
     private static let PayUnitMax = 10_000
     private static let PeopleMin = 2
@@ -22,15 +39,15 @@ enum SplitBillResult: Equatable {
     
     static func splitBill(payUnit: UInt, amount: UInt, peopleNumber: UInt) -> SplitBillResult {
         guard (PayUnitMin...PayUnitMax).contains(Int(payUnit)) else {
-            return SplitBillResult.failure(message: "支払単位が範囲外です")
+            return SplitBillResult.failure(error: .payUnit)
         }
         
         guard (AmountMin...AmountMax).contains(Int(amount)) else {
-            return SplitBillResult.failure(message: "金額が範囲外です")
+            return SplitBillResult.failure(error: .amount)
         }
         
         guard (PeopleMin...PeopleMax).contains(Int(peopleNumber)) else {
-            return SplitBillResult.failure(message: "人数が範囲外です")
+            return SplitBillResult.failure(error: .peopleNumber)
         }
         
         return SplitBillResult.sucsess(payment: Payment.init(payUnit: payUnit,
@@ -57,5 +74,3 @@ struct Payment: Equatable {
     }
     
 }
-
-
