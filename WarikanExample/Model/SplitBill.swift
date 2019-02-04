@@ -33,14 +33,29 @@ enum SplitBillResult: Equatable {
             return SplitBillResult.failure(message: "人数が範囲外です")
         }
         
-        // 未実装
-        return SplitBillResult.sucsess(payment: Payment.init(payPerPerson: 100, kickback: 100))
+        return SplitBillResult.sucsess(payment: Payment.init(payUnit: payUnit,
+                                                             amount: amount,
+                                                             peopleNumber: peopleNumber))
+    }
+}
+
+fileprivate extension UInt {
+    func zeroOrOne() -> UInt {
+        return self == 0 ? 0 : 1
     }
 }
 
 struct Payment: Equatable {
     let payPerPerson: UInt
     let kickback: UInt
+
+    init(payUnit: UInt, amount: UInt, peopleNumber: UInt) {
+        let fraction = amount % payUnit
+        let units = amount / payUnit + fraction.zeroOrOne()
+        payPerPerson = UInt(ceil(Double(units) / Double(peopleNumber))) * payUnit
+        kickback = peopleNumber * payPerPerson - amount
+    }
+    
 }
 
 
